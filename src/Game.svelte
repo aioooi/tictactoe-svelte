@@ -1,6 +1,6 @@
 <script>
   // import { onMount } from "svelte";
-  import * as Ttt from "./tictactoe.js";
+  import * as ttt from "./tictactoe.js";
 
   export let handicap = 100;
 
@@ -9,7 +9,7 @@
     state = game.state;
   }
 
-  let game = new Ttt.Game(handicap);
+  let game = new ttt.Game(handicap);
   let state = game.state;
 </script>
 
@@ -53,12 +53,12 @@
     {#each [...Array(3).keys()] as i}
       <tr>
         {#each [...Array(3).keys()] as j}
-          <td class:played={state[i][j] !== Ttt.EMPTY}
+          <td class:played={state[i][j] !== ttt.EMPTY}
               on:click|once={() => playField(i, j)}>
             <!-- <button on:click={() => playField(i, j)}>
             </button> -->
-            {@html state[i][j] === Ttt.HUMAN ? '&#x0fbe;' : ''}
-            {@html state[i][j] === Ttt.COMPUTER ? '&#x262f;' : ''}
+            {@html state[i][j] === ttt.HUMAN ? '&#x0fbe;' : ''}
+            {@html state[i][j] === ttt.COMPUTER ? '&#x262f;' : ''}
           </td>
         {/each}
       </tr>
