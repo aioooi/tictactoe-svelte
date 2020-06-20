@@ -1,28 +1,19 @@
 <script>
   import { onMount } from "svelte";
+  import * as Ttt from "./tictactoe.js";
 
   export let handicap = 100;
 
-  const EMPTY = 0;
-  const HUMAN = 1;
-  const COMPUTER = -1;
-
-  // let state = [[...Array(3)].map(() => [...Array(3)].map(() => 0))];
-  let state = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0]
-  ]
-
   function playField(i, j) {
-    state[i][j] = HUMAN;
-    console.log(state);
+    game.humanMove(i, j)
   }
+
+  let game = new Ttt.Game(100);
 </script>
 
 <style>
   div {
-    padding: 2eM;
+    padding: 2em;
     background-color: pink;
   }
   table {
@@ -37,10 +28,10 @@
   }
 
   td {
-    width: 1eM;
-    height: 1eM;
-    font-size: 3eM;
-    line-height: 1eM;
+    width: 1em;
+    height: 1em;
+    font-size: 3em;
+    line-height: 1em;
     border: 3px solid #c4c4c4;
     margin: 0;
     padding: 1em;
@@ -56,15 +47,16 @@
 <div>
   <p>Handicap = {handicap}</p>
   <table>
-    {#each [...Array(3).keys()] as i} 
+    {#each [...Array(3).keys()] as i}
       <tr>
         {#each [...Array(3).keys()] as j}
-          <td class:played={state[i][j] != 0}
-              on:click|once={() => playField(i, j)}>
+          <td
+            class:played={!game.isEmpty(i, j)}
+            on:click|once={() => playField(i, j)}>
             <!-- <button on:click={() => playField(i, j)}>
             </button> -->
-            {@html state[i][j] == HUMAN ? '&#x0fbe;' : ''}
-            {@html state[i][j] == COMPUTER ? '&#x262f;' : ''}
+            {@html game.isHuman(i, j) ? '&#x0fbe;' : ''}
+            {@html game.isComputer(i, j) ? '&#x262f;' : ''}
           </td>
         {/each}
       </tr>
