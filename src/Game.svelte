@@ -1,14 +1,16 @@
 <script>
-  import { onMount } from "svelte";
+  // import { onMount } from "svelte";
   import * as Ttt from "./tictactoe.js";
 
   export let handicap = 100;
 
   function playField(i, j) {
-    game.humanMove(i, j)
+    game.humanMove(i, j);
+    state = game.state;
   }
 
-  let game = new Ttt.Game(100);
+  let game = new Ttt.Game(handicap);
+  let state = game.state;
 </script>
 
 <style>
@@ -16,6 +18,7 @@
     padding: 2em;
     background-color: pink;
   }
+
   table {
     margin: 0 auto; /* center the able with auto left right margin */
     border-collapse: collapse;
@@ -50,13 +53,12 @@
     {#each [...Array(3).keys()] as i}
       <tr>
         {#each [...Array(3).keys()] as j}
-          <td
-            class:played={!game.isEmpty(i, j)}
-            on:click|once={() => playField(i, j)}>
+          <td class:played={state[i][j] !== Ttt.EMPTY}
+              on:click|once={() => playField(i, j)}>
             <!-- <button on:click={() => playField(i, j)}>
             </button> -->
-            {@html game.isHuman(i, j) ? '&#x0fbe;' : ''}
-            {@html game.isComputer(i, j) ? '&#x262f;' : ''}
+            {@html state[i][j] === Ttt.HUMAN ? '&#x0fbe;' : ''}
+            {@html state[i][j] === Ttt.COMPUTER ? '&#x262f;' : ''}
           </td>
         {/each}
       </tr>
