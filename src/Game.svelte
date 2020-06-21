@@ -14,6 +14,12 @@
   let state = game.state;
   let locked = game.turn === ttt.COMPUTER ? true : false;
 
+  function newGame(humanBegins = true) {
+    game = new ttt.Game(handicap, humanBegins);
+    state = game.state;
+    locked = game.turn === ttt.COMPUTER ? true : false;
+  }
+
   async function playField(i, j) {
     if (!locked) {
       console.log("not locked");
