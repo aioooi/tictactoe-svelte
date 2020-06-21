@@ -4,34 +4,33 @@
 
   export let handicap = 50;
   export let humanBegins = true;
+  export let delay = 400;
+
+  const sleep = milliseconds => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  };
 
   let game = new ttt.Game(handicap, humanBegins);
   let state = game.state;
   let locked = game.turn === ttt.COMPUTER ? true : false;
 
-  function playField(i, j) {
+  async function playField(i, j) {
     if (!locked) {
-      console.log('not locked')
+      console.log("not locked");
       locked = true;
-      
+
       try {
         let gameFinished = game.playerMove(i, j);
         state = game.state;
-        
+
         if (gameFinished) {
-          
           let winner = game.getWinner();
           let line = game.getWinningLine();
 
           // TODO treat result
-        } 
-        else {
-          console.log('game not finished, computer moves')
+        } else {
+          await sleep(delay);
 
-
-          // sleep a little,
-
-          // then
           gameFinished = game.makeMove();
           state = game.state;
 
@@ -40,13 +39,11 @@
             let line = game.getWinningLine();
 
             // treat result
-          }
-          else {
+          } else {
             locked = false;
           }
         }
-      } 
-      catch {
+      } catch {
         // TODO
       }
     }
