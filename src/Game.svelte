@@ -22,9 +22,7 @@
 
   async function playField(i, j) {
     if (!locked) {
-      console.log("not locked");
       locked = true;
-
       try {
         let gameFinished = game.playerMove(i, j);
         state = game.state;
@@ -58,8 +56,8 @@
 
 <style>
   div {
-    padding: 2em;
-    background-color: pink;
+    padding: 3vw;
+    /* background-color: pink; */
   }
 
   table {
@@ -74,19 +72,41 @@
   }
 
   td {
-    width: 1em;
-    height: 1em;
-    font-size: 3em;
-    line-height: 1em;
+    width: 10vw;
+    height: 10vw;
+    font-size: 6vw;
+    line-height: 6vw;
     border: 3px solid #c4c4c4;
     margin: 0;
     padding: 1em;
     cursor: pointer;
+    color: white;
+  }
+
+  td:hover {
+    background-color: #f2f2f2;
   }
 
   .played {
     background-color: #e9e9e9;
     cursor: auto;
+    color: black;
+    animation: click 300ms ease-out;
+    /* delay iteration-count direction fill-mode; */
+  }
+
+  @keyframes click {
+    from {
+      background-color: rgb(224, 133, 148);
+      color: rgb(206, 169, 175);
+    }
+    to {
+      background-color: #e9e9e9;
+      color: black;
+    } 
+  }
+  .played:hover {
+    background-color: #e9e9e9;
   }
 </style>
 
