@@ -2,15 +2,55 @@
   // import { onMount } from "svelte";
   import * as ttt from "./tictactoe.js";
 
-  export let handicap = 100;
+  export let handicap = 50;
+  export let humanBegins = true;
+
+  let game = new ttt.Game(handicap, humanBegins);
+  let state = game.state;
+  let locked = game.turn === ttt.COMPUTER ? true : false;
 
   function playField(i, j) {
-    game.humanMove(i, j);
-    state = game.state;
-  }
+    if (!locked) {
+      console.log('not locked')
+      locked = true;
+      
+      try {
+        let gameFinished = game.playerMove(i, j);
+        state = game.state;
+        
+        if (gameFinished) {
+          
+          let winner = game.getWinner();
+          let line = game.getWinningLine();
 
-  let game = new ttt.Game(handicap);
-  let state = game.state;
+          // TODO treat result
+        } 
+        else {
+          console.log('game not finished, computer moves')
+
+
+          // sleep a little,
+
+          // then
+          gameFinished = game.makeMove();
+          state = game.state;
+
+          if (gameFinished) {
+            let winner = game.getWinner();
+            let line = game.getWinningLine();
+
+            // treat result
+          }
+          else {
+            locked = false;
+          }
+        }
+      } 
+      catch {
+        // TODO
+      }
+    }
+  }
 </script>
 
 <style>
@@ -53,8 +93,9 @@
     {#each [...Array(3).keys()] as i}
       <tr>
         {#each [...Array(3).keys()] as j}
-          <td class:played={state[i][j] !== ttt.EMPTY}
-              on:click|once={() => playField(i, j)}>
+          <td
+            class:played={state[i][j] !== ttt.EMPTY}
+            on:click|once={() => playField(i, j)}>
             <!-- <button on:click={() => playField(i, j)}>
             </button> -->
             {@html state[i][j] === ttt.HUMAN ? '&#x0fbe;' : ''}
