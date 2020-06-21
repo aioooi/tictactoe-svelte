@@ -4,7 +4,7 @@
 
   export let handicap = 50;
   export let humanBegins = true;
-  export let delay = 400;
+  export let delay = 600;
 
   const sleep = milliseconds => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -33,7 +33,7 @@
 
           // TODO treat result
         } else {
-          await sleep(delay);
+          await sleep(Math.floor((0.6 + 0.4 * Math.random()) * delay));
 
           gameFinished = game.makeMove();
           state = game.state;
