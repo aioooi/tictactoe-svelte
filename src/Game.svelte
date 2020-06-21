@@ -118,7 +118,7 @@
         {#each [...Array(3).keys()] as j}
           <td
             class:played={state[i][j] !== ttt.EMPTY}
-            on:click|once={() => playField(i, j)}>
+            on:click={() => playField(i, j)}>
             <!-- <button on:click={() => playField(i, j)}>
             </button> -->
             {@html state[i][j] === ttt.HUMAN ? '&#x0fbe;' : ''}
