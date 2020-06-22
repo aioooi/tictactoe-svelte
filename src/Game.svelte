@@ -1,12 +1,11 @@
 <script>
-  // import { onMount } from "svelte";
   import * as ttt from "./tictactoe.js";
 
   import Scoreboard from "./Scoreboard.svelte"
 
   export let handicap = 80;
   export let playerBegins = true;
-  export let delay = 600;
+  export let delay = 300;
 
   const sleep = milliseconds => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -99,61 +98,66 @@
 <div>
   <Scoreboard {stats} />
   <p>Handicap = {handicap}</p>
-  <table>
+  <div class="board">
     {#each [...Array(3).keys()] as i}
-      <tr>
-        {#each [...Array(3).keys()] as j}
-          <td
-            class:played={state[i][j] !== ttt.EMPTY && finalState[i][j] === 0}
-            class:highlight-winning-line={finalState[i][j] === 1}
-            on:click={() => move(i, j)}>
-            <!-- <button on:click={() => playField(i, j)}>
-            </button> -->
+      {#each [...Array(3).keys()] as j}
+        <div class="square"
+          class:played={state[i][j] !== ttt.EMPTY && finalState[i][j] === 0}
+          class:highlight-winning-line={finalState[i][j] === 1}
+          on:click={() => move(i, j)}>
+          <div class="tag">
             {@html state[i][j] === ttt.PLAYER ? '&#x0fbe;' : ''}
             {@html state[i][j] === ttt.COMPUTER ? '&#x262f;' : ''}
-          </td>
-        {/each}
-      </tr>
+          </div>
+        </div>
+      {/each}
     {/each}
-  </table>
+  </div>
 </div>
 
 
 <style>
+  .board {
+    margin: auto;
+    width: 60vw;
+    height: 60vw;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 4px;
+    background-color: #d8d8d8;
+    padding: 100px;
+  }
+
+  .square {
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 4%;
+    cursor: pointer;
+    color: white;
+    box-shadow: 3px 3px 5px #999;
+  }
+  
+  .square:hover {
+    background-color: var(--HIGHLIGHT-COLOR);
+    box-shadow: 1px 1px 2px #999;
+  }
+
+  .tag {
+    /* border: 1px dashed magenta; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10vw;
+    line-height: 10vw;
+  }
+
   :root {
     --HIGHLIGHT-COLOR: #e9e9e9;
     --MARKER-COLOR: #black;
-  }
-  div {
-    padding: 3vw;
-    /* background-color: pink; */
-  }
-
-  table {
-    margin: 0 auto; /* center the able with auto left right margin */
-    border-collapse: collapse;
-    border: 1px solid #656565;
-  }
-
-  tr {
-    margin: 0;
-    padding: 0;
-  }
-
-  td {
-    width: 10vw;
-    height: 10vw;
-    font-size: 7vw;
-    line-height: 7vw;
-    border: 3px solid #c4c4c4;
-    margin: 0;
-    padding: 0em;
-    cursor: pointer;
-    color: white;
-  }
-
-  td:hover {
-    background-color: #f2f2f2;
   }
 
   .played {
