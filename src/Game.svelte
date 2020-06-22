@@ -27,7 +27,7 @@
     locked = false;
   }
 
-  async function playField(i, j) {
+  async function move(i, j) {
     if (!locked) {
       locked = true;
       try {
@@ -130,7 +130,7 @@
         {#each [...Array(3).keys()] as j}
           <td
             class:played={state[i][j] !== ttt.EMPTY}
-            on:click={() => playField(i, j)}>
+            on:click={() => move(i, j)}>
             <!-- <button on:click={() => playField(i, j)}>
             </button> -->
             {@html state[i][j] === ttt.HUMAN ? '&#x0fbe;' : ''}

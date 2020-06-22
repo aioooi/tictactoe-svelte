@@ -3,7 +3,7 @@
 
   export let name;
   
-  let handicap = 1002936;
+  let handicap = 60;
 </script>
 
 <main>
