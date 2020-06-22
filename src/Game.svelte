@@ -2,6 +2,8 @@
   // import { onMount } from "svelte";
   import * as ttt from "./tictactoe.js";
 
+  import Scoreboard from "./Scoreboard.svelte"
+
   export let handicap = 80;
   export let playerBegins = true;
   export let delay = 600;
@@ -142,6 +144,7 @@
 </style>
 
 <div>
+  <Scoreboard {stats} />
   <p>Handicap = {handicap}</p>
   <table>
     {#each [...Array(3).keys()] as i}
