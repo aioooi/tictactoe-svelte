@@ -2,7 +2,7 @@
   // import { onMount } from "svelte";
   import * as ttt from "./tictactoe.js";
 
-  export let handicap = 50;
+  export let handicap = 80;
   export let humanBegins = true;
   export let delay = 600;
 
@@ -10,14 +10,21 @@
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   };
 
-  let game = new ttt.Game(handicap, humanBegins);
-  let state = game.state;
-  let locked = game.turn === ttt.COMPUTER ? true : false;
+  let game;
+  let state;
+  let locked;
 
-  function newGame(humanBegins = true) {
+  async function newGame(humanBegins = true) {
     game = new ttt.Game(handicap, humanBegins);
+    state = game.state; // reset board 
+    await sleep(50);
+
+    // locked = game.turn === ttt.COMPUTER ? true : false;
+    if (!humanBegins) {
+      game.makeMove();
+    }
     state = game.state;
-    locked = game.turn === ttt.COMPUTER ? true : false;
+    locked = false;
   }
 
   async function playField(i, j) {
@@ -28,10 +35,12 @@
         state = game.state;
 
         if (gameFinished) {
-          let winner = game.getWinner();
-          let line = game.getWinningLine();
-
           // TODO treat result
+          // let winner = game.getWinner();
+          // let line = game.getWinningLine();
+
+          await sleep(1000);
+          newGame(false);
         } else {
           await sleep(Math.floor((0.6 + 0.4 * Math.random()) * delay));
 
@@ -39,10 +48,10 @@
           state = game.state;
 
           if (gameFinished) {
-            let winner = game.getWinner();
-            let line = game.getWinningLine();
-
-            // treat result
+            await sleep(1000);
+            newGame(true);
+            // let winner = game.getWinner();
+            // let line = game.getWinningLine();
           } else {
             locked = false;
           }
@@ -52,6 +61,8 @@
       }
     }
   }
+
+  newGame(humanBegins);
 </script>
 
 <style>
@@ -103,8 +114,9 @@
     to {
       background-color: #e9e9e9;
       color: black;
-    } 
+    }
   }
+
   .played:hover {
     background-color: #e9e9e9;
   }
