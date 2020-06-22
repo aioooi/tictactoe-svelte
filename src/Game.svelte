@@ -3,7 +3,7 @@
   import * as ttt from "./tictactoe.js";
 
   export let handicap = 80;
-  export let humanBegins = true;
+  export let playerBegins = true;
   export let delay = 600;
 
   const sleep = milliseconds => {
@@ -14,13 +14,13 @@
   let state;
   let locked;
 
-  async function newGame(humanBegins = true) {
-    game = new ttt.Game(handicap, humanBegins);
+  async function newGame(playerBegins = true) {
+    game = new ttt.Game(handicap, playerBegins);
     state = game.state; // reset board 
     await sleep(50);
 
     // locked = game.turn === ttt.COMPUTER ? true : false;
-    if (!humanBegins) {
+    if (!playerBegins) {
       game.makeMove();
     }
     state = game.state;
@@ -62,7 +62,7 @@
     }
   }
 
-  newGame(humanBegins);
+  newGame(playerBegins);
 </script>
 
 <style>
@@ -136,7 +136,7 @@
             on:click={() => move(i, j)}>
             <!-- <button on:click={() => playField(i, j)}>
             </button> -->
-            {@html state[i][j] === ttt.HUMAN ? '&#x0fbe;' : ''}
+            {@html state[i][j] === ttt.PLAYER ? '&#x0fbe;' : ''}
             {@html state[i][j] === ttt.COMPUTER ? '&#x262f;' : ''}
           </td>
         {/each}
