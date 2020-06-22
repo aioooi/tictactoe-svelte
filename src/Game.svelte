@@ -96,8 +96,6 @@
 
 
 <div>
-  <Scoreboard {stats} />
-  <p>Handicap = {handicap}</p>
   <div class="board">
     {#each [...Array(3).keys()] as i}
       {#each [...Array(3).keys()] as j}
@@ -113,19 +111,21 @@
       {/each}
     {/each}
   </div>
+  <Scoreboard {stats} />
 </div>
 
 
 <style>
   .board {
     margin: auto;
-    width: 60vw;
-    height: 60vw;
+    padding: 0;
+    width: 50vw;
+    height: 50vw;
+    max-width: 50vh;
+    max-height: 50vh;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 4px;
-    background-color: #d8d8d8;
-    padding: 100px;
   }
 
   .square {
@@ -151,8 +151,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 10vw;
-    line-height: 10vw;
+    font-size: 5vw;
+    line-height: 5vw;
   }
 
   :root {
