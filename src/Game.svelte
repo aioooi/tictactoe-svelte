@@ -16,15 +16,35 @@
 
   async function newGame(playerBegins = true) {
     game = new ttt.Game(handicap, playerBegins);
-    state = game.state; // reset board 
-    await sleep(50);
+    state = game.state; // reset board
 
-    // locked = game.turn === ttt.COMPUTER ? true : false;
     if (!playerBegins) {
+      locked = true;
+      await sleep(50);
       game.makeMove();
     }
     state = game.state;
     locked = false;
+  }
+
+  let stats = {
+    computer: 0,
+    draw: 0,
+    player: 0
+  };
+
+  function processResults() {
+    if (game.getWinner === ttt.COMPUTER) {
+      stats.computer += 1;
+    } else if (game.getWinner === ttt.PLAYER) {
+      stats.player += 1;
+    } else {
+      stats.draw += 1;
+    }
+
+    console.log(stats);
+    // TODO update winning line in GUI
+    // let line = game.getWinningLine();
   }
 
   async function move(i, j) {
@@ -35,10 +55,7 @@
         state = game.state;
 
         if (gameFinished) {
-          // TODO treat result
-          // let winner = game.getWinner();
-          // let line = game.getWinningLine();
-
+          processResults();
           await sleep(1000);
           newGame(false);
         } else {
@@ -48,10 +65,9 @@
           state = game.state;
 
           if (gameFinished) {
+            processResults();
             await sleep(1000);
             newGame(true);
-            // let winner = game.getWinner();
-            // let line = game.getWinningLine();
           } else {
             locked = false;
           }
@@ -66,9 +82,9 @@
 </script>
 
 <style>
-:root {
-  --HIGHLIGHT-COLOR: #e9e9e9;
-}
+  :root {
+    --HIGHLIGHT-COLOR: #e9e9e9;
+  }
   div {
     padding: 3vw;
     /* background-color: pink; */
