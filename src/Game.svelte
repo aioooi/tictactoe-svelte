@@ -14,17 +14,24 @@
 
   let game;
   let state;
+  let finalState;
   let locked;
 
   async function newGame(playerBegins = true) {
     game = new ttt.Game(handicap, playerBegins);
-    state = game.state; // reset board
-
+    state = game.state; 
+    finalState = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ];
+    
     if (!playerBegins) {
       locked = true;
       await sleep(50);
       game.makeMove();
     }
+
     state = game.state;
     locked = false;
   }
@@ -35,18 +42,25 @@
     player: 0
   };
 
-  function processResults() {
-    if (game.getWinner === ttt.COMPUTER) {
+  async function processResults() {
+    if (game.winner === ttt.COMPUTER) {
       stats.computer += 1;
-    } else if (game.getWinner === ttt.PLAYER) {
+    } else if (game.winner === ttt.PLAYER) {
       stats.player += 1;
     } else {
       stats.draw += 1;
     }
 
-    console.log(stats);
-    // TODO update winning line in GUI
-    // let line = game.getWinningLine();
+    let line = game._winningLine;
+    finalState = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ]
+
+    line.forEach(e => {
+        finalState[Math.floor(e / 3)][e % 3] = 1;
+    });
   }
 
   async function move(i, j) {
@@ -62,10 +76,8 @@
           newGame(false);
         } else {
           await sleep(Math.floor((0.6 + 0.4 * Math.random()) * delay));
-
           gameFinished = game.makeMove();
           state = game.state;
-
           if (gameFinished) {
             processResults();
             await sleep(1000);
@@ -83,9 +95,34 @@
   newGame(playerBegins);
 </script>
 
+
+<div>
+  <Scoreboard {stats} />
+  <p>Handicap = {handicap}</p>
+  <table>
+    {#each [...Array(3).keys()] as i}
+      <tr>
+        {#each [...Array(3).keys()] as j}
+          <td
+            class:played={state[i][j] !== ttt.EMPTY && finalState[i][j] === 0}
+            class:highlight-winning-line={finalState[i][j] === 1}
+            on:click={() => move(i, j)}>
+            <!-- <button on:click={() => playField(i, j)}>
+            </button> -->
+            {@html state[i][j] === ttt.PLAYER ? '&#x0fbe;' : ''}
+            {@html state[i][j] === ttt.COMPUTER ? '&#x262f;' : ''}
+          </td>
+        {/each}
+      </tr>
+    {/each}
+  </table>
+</div>
+
+
 <style>
   :root {
     --HIGHLIGHT-COLOR: #e9e9e9;
+    --MARKER-COLOR: #black;
   }
   div {
     padding: 3vw;
@@ -106,11 +143,11 @@
   td {
     width: 10vw;
     height: 10vw;
-    font-size: 6vw;
-    line-height: 6vw;
+    font-size: 7vw;
+    line-height: 7vw;
     border: 3px solid #c4c4c4;
     margin: 0;
-    padding: 1em;
+    padding: 0em;
     cursor: pointer;
     color: white;
   }
@@ -122,7 +159,7 @@
   .played {
     background-color: var(--HIGHLIGHT-COLOR);
     cursor: auto;
-    color: black;
+    color: var(--MARKER-COLOR);
     animation: click 300ms ease-out;
     /* delay iteration-count direction fill-mode; */
   }
@@ -134,32 +171,31 @@
     }
     to {
       background-color: var(--HIGHLIGHT-COLOR);
-      color: black;
+      color: var(--MARKER-COLOR);
     }
   }
 
   .played:hover {
     background-color: var(--HIGHLIGHT-COLOR);
   }
-</style>
 
-<div>
-  <Scoreboard {stats} />
-  <p>Handicap = {handicap}</p>
-  <table>
-    {#each [...Array(3).keys()] as i}
-      <tr>
-        {#each [...Array(3).keys()] as j}
-          <td
-            class:played={state[i][j] !== ttt.EMPTY}
-            on:click={() => move(i, j)}>
-            <!-- <button on:click={() => playField(i, j)}>
-            </button> -->
-            {@html state[i][j] === ttt.PLAYER ? '&#x0fbe;' : ''}
-            {@html state[i][j] === ttt.COMPUTER ? '&#x262f;' : ''}
-          </td>
-        {/each}
-      </tr>
-    {/each}
-  </table>
-</div>
+  .highlight-winning-line {
+    animation: winning-line 500ms ease-in-out 2;
+    /* border-color: blue; */
+  }
+
+  @keyframes winning-line {
+    0% {
+      background-color: var(--HIGHLIGHT-COLOR);
+      color: var(--MARKER-COLOR);
+    }
+    50% {
+      background-color: rgb(255, 93, 93);
+      color: rgb(206, 169, 175);
+    }
+    100% {
+      background-color: var(--HIGHLIGHT-COLOR);
+      color: var(--MARKER-COLOR);
+    }
+  }
+</style>
