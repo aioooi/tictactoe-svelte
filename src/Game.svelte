@@ -66,6 +66,9 @@
 </script>
 
 <style>
+:root {
+  --HIGHLIGHT-COLOR: #e9e9e9;
+}
   div {
     padding: 3vw;
     /* background-color: pink; */
@@ -99,7 +102,7 @@
   }
 
   .played {
-    background-color: #e9e9e9;
+    background-color: var(--HIGHLIGHT-COLOR);
     cursor: auto;
     color: black;
     animation: click 300ms ease-out;
@@ -112,13 +115,13 @@
       color: rgb(206, 169, 175);
     }
     to {
-      background-color: #e9e9e9;
+      background-color: var(--HIGHLIGHT-COLOR);
       color: black;
     }
   }
 
   .played:hover {
-    background-color: #e9e9e9;
+    background-color: var(--HIGHLIGHT-COLOR);
   }
 </style>
 
