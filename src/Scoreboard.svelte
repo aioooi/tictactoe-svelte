@@ -1,4 +1,6 @@
 <script>
+  import ScoreboardCell from './ScoreboardCell.svelte';
+
   export let stats = {
     computer: 0,
     draw: 0,
@@ -18,14 +20,11 @@
     margin: 3em 0;
     grid-gap: 3px;
   }
-
-  .cell {
-    padding: 0.3em;
-  }
 </style>
 
 <div class="grid">
-  {#each [name, 'Draw', 'Computer', stats.player, stats.draw, stats.computer] as t}
-    <div class="cell">{t}</div>
-  {/each}
+  <ScoreboardCell label={name} value={stats.player} />
+  <ScoreboardCell label={'Draw'} value={stats.draw} />
+  <ScoreboardCell label={'Computer'} value={stats.computer} />
 </div>
+
