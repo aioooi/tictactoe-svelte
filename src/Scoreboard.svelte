@@ -6,6 +6,7 @@
   };
 
   export let name = "Player";
+
 </script>
 
 <style>

@@ -184,8 +184,7 @@
   }
 
   .highlight-winning-line {
-    animation: winning-line 500ms ease-in-out 2;
-    /* border-color: blue; */
+    animation: winning-line 475ms ease-in-out 2;
   }
 
   @keyframes winning-line {
