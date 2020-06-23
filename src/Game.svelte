@@ -77,8 +77,9 @@
             locked = false;
           }
         }
-      } catch {
-        // TODO
+      } catch (e) {
+        console.error(e);
+        locked = false;
       }
     }
   }
