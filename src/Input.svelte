@@ -26,6 +26,7 @@
 
   input[type=text]:focus {
     background: #fff5f5;
+    outline: none;
     border-bottom: 2px solid #ffa7a7;
   }
 
@@ -39,7 +40,7 @@
   <input type="text" bind:value disabled />
 {:else}
   <label>&#x270E;</label>
-  <input type="text" bind:value />
+  <input type="text" bind:value on:focusout={handleInput}/>
 {/if}
   <input type="submit">
 </form>
