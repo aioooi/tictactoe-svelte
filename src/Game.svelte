@@ -38,15 +38,18 @@
   };
 
   async function processResults() {
+    let playerBegins = true;
     if (game.winner === ttt.COMPUTER) {
       stats.computer += 1;
     } else if (game.winner === ttt.PLAYER) {
       stats.player += 1;
+      playerBegins = false;
     } else {
       stats.draw += 1;
+      playerBegins = game._randInt(2) ? true : false;
     }
 
-    // finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
     
     if (game.winner !== ttt.EMPTY) {
       let line = game._winningLine;
@@ -57,7 +60,7 @@
     }
 
     await sleep(1200);
-    newGame(false);
+    newGame(playerBegins);
   }
 
   async function move(i, j) {
