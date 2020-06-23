@@ -46,12 +46,15 @@
       stats.draw += 1;
     }
 
-    let line = game._winningLine;
-    finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-
-    line.forEach(e => {
-      finalState[Math.floor(e / 3)][e % 3] = 1;
-    });
+    // finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    
+    if (game.winner !== ttt.EMPTY) {
+      let line = game._winningLine;
+  
+      line.forEach(e => {
+        finalState[Math.floor(e / 3)][e % 3] = 1;
+      });
+    }
 
     await sleep(1200);
     newGame(false);
