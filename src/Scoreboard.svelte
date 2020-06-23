@@ -9,10 +9,14 @@
 
   export let name = "Player";
 
+  
+
 </script>
 
 <style>
   .grid {
+    width: 50vw;
+    max-width: 50vh;
     display: grid;
     text-align: center;
     grid-template-columns: 1fr 1fr 1fr;
@@ -23,7 +27,7 @@
 </style>
 
 <div class="grid">
-  <ScoreboardCell label={name} value={stats.player} />
+  <ScoreboardCell label={name} value={stats.player} edit={true} />
   <ScoreboardCell label={'Draw'} value={stats.draw} />
   <ScoreboardCell label={'Computer'} value={stats.computer} />
 </div>

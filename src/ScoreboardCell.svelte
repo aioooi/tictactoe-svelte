@@ -1,8 +1,13 @@
 <script>
   import { elasticOut, expoInOut, quartOut } from "svelte/easing";
 
+  import Input from './Input.svelte';
+
   export let label = "LABEL";
   export let value = 0;
+
+  export let edit = false;
+  let disabled = !edit;
 
   function highlight(node, { duration = 400 }) {
     const MAXSCALE = 1.6;
@@ -30,7 +35,11 @@
 
 {#each [value] as v (v)}
   <div in:highlight >
-    <div class="cell">{label}</div>
+    {#if edit}
+      <Input bind:value={label} bind:disabled={disabled} />
+    {:else}
+      <div class="cell">{@html label }</div>
+    {/if}
     <div class="cell">{value}</div>
   </div>
 {/each}
