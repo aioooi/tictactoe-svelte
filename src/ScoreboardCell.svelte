@@ -4,8 +4,8 @@
   export let label = "LABEL";
   export let value = 0;
 
-  function highlight(node, { duration = 300 }) {
-    const MAXSCALE = 1.4;
+  function highlight(node, { duration = 400 }) {
+    const MAXSCALE = 1.6;
 
     return {
       duration,
