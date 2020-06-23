@@ -95,7 +95,8 @@
 
 <style>
   :root {
-    --HIGHLIGHT-COLOR: #e9e9e9;
+    --PLAYED-COLOR: #e9e9e9;
+    --HIGHLIGHT-COLOR: #ffa7a7;
     --HOVER-COLOR: #fff5f5;
     --MARKER-COLOR: #black;
   }
@@ -140,7 +141,7 @@
   }
 
   .played {
-    background-color: var(--HIGHLIGHT-COLOR);
+    background-color: var(--PLAYED-COLOR);
     cursor: auto;
     color: var(--MARKER-COLOR);
     animation: click 300ms ease-out;
@@ -149,17 +150,17 @@
 
   @keyframes click {
     from {
-      background-color: rgb(224, 133, 148);
-      color: rgb(206, 169, 175);
+      background-color: var(--HIGHLIGHT-COLOR);
+      color: #fff5f5;
     }
     to {
-      background-color: var(--HIGHLIGHT-COLOR);
+      background-color: var(--PLAYED-COLOR);
       color: var(--MARKER-COLOR);
     }
   }
 
   .played:hover {
-    background-color: var(--HIGHLIGHT-COLOR);
+    background-color: var(--PLAYED-COLOR);
   }
 
   .highlight-winning-line {
@@ -168,15 +169,15 @@
 
   @keyframes winning-line {
     0% {
-      background-color: var(--HIGHLIGHT-COLOR);
+      background-color: var(--PLAYED-COLOR);
       color: var(--MARKER-COLOR);
     }
     50% {
-      background-color: rgb(255, 181, 181);
-      color: rgb(206, 169, 175);
+      background-color: var(--HIGHLIGHT-COLOR);
+      color: #fff5f5;
     }
     100% {
-      background-color: var(--HIGHLIGHT-COLOR);
+      background-color: var(--PLAYED-COLOR);
       color: var(--MARKER-COLOR);
     }
   }

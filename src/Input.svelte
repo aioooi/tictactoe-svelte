@@ -12,7 +12,7 @@
 
 <style>
   input[type=text] {
-    /* text-align: center; */
+    text-align: center;
     margin: 0;
     width: 80%;
     border: none;
@@ -25,8 +25,8 @@
   }
 
   input[type=text]:focus {
-    background: #e7e7ff;
-    border-bottom: 2px solid rgb(53, 53, 197);
+    background: #fff5f5;
+    border-bottom: 2px solid #ffa7a7;
   }
 
   input[type=submit] {
