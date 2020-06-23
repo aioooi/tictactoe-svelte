@@ -1,7 +1,7 @@
 <script>
   import * as ttt from "./tictactoe.js";
 
-  import Scoreboard from "./Scoreboard.svelte"
+  import Scoreboard from "./Scoreboard.svelte";
 
   export let handicap = 80;
   export let playerBegins = true;
@@ -18,13 +18,9 @@
 
   async function newGame(playerBegins = true) {
     game = new ttt.Game(handicap, playerBegins);
-    state = game.state; 
-    finalState = [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-    ];
-    
+    state = game.state;
+    finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+
     if (!playerBegins) {
       locked = true;
       await sleep(50);
@@ -51,15 +47,14 @@
     }
 
     let line = game._winningLine;
-    finalState = [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-    ]
+    finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
     line.forEach(e => {
-        finalState[Math.floor(e / 3)][e % 3] = 1;
+      finalState[Math.floor(e / 3)][e % 3] = 1;
     });
+
+    await sleep(1200);
+    newGame(false);
   }
 
   async function move(i, j) {
@@ -71,16 +66,13 @@
 
         if (gameFinished) {
           processResults();
-          await sleep(1000);
-          newGame(false);
         } else {
           await sleep(Math.floor((0.6 + 0.4 * Math.random()) * delay));
           gameFinished = game.makeMove();
           state = game.state;
+
           if (gameFinished) {
             processResults();
-            await sleep(1000);
-            newGame(true);
           } else {
             locked = false;
           }
@@ -94,28 +86,13 @@
   newGame(playerBegins);
 </script>
 
-
-<div>
-  <div class="board">
-    {#each [...Array(3).keys()] as i}
-      {#each [...Array(3).keys()] as j}
-        <div class="square"
-          class:played={state[i][j] !== ttt.EMPTY && finalState[i][j] === 0}
-          class:highlight-winning-line={finalState[i][j] === 1}
-          on:click={() => move(i, j)}>
-          <div class="tag">
-            {@html state[i][j] === ttt.PLAYER ? '&#x0fbe;' : ''}
-            {@html state[i][j] === ttt.COMPUTER ? '&#x262f;' : ''}
-          </div>
-        </div>
-      {/each}
-    {/each}
-  </div>
-  <Scoreboard {stats} />
-</div>
-
-
 <style>
+  :root {
+    --HIGHLIGHT-COLOR: #e9e9e9;
+    --HOVER-COLOR: #fff5f5;
+    --MARKER-COLOR: #black;
+  }
+
   .board {
     margin: auto;
     padding: 0;
@@ -137,12 +114,12 @@
     border-radius: 4%;
     cursor: pointer;
     color: white;
-    box-shadow: 3px 3px 5px #999;
+    box-shadow: 2px 2px 4px #bbb;
   }
-  
+
   .square:hover {
-    background-color: var(--HIGHLIGHT-COLOR);
-    box-shadow: 1px 1px 2px #999;
+    background-color: var(--HOVER-COLOR);
+    box-shadow: 1px 1px 2px #aaa;
   }
 
   .tag {
@@ -153,11 +130,6 @@
     transform: translate(-50%, -50%);
     font-size: 5vw;
     line-height: 5vw;
-  }
-
-  :root {
-    --HIGHLIGHT-COLOR: #e9e9e9;
-    --MARKER-COLOR: #black;
   }
 
   .played {
@@ -184,7 +156,7 @@
   }
 
   .highlight-winning-line {
-    animation: winning-line 475ms ease-in-out 2;
+    animation: winning-line 800ms ease-in-out 1;
   }
 
   @keyframes winning-line {
@@ -193,7 +165,7 @@
       color: var(--MARKER-COLOR);
     }
     50% {
-      background-color: rgb(255, 93, 93);
+      background-color: rgb(255, 181, 181);
       color: rgb(206, 169, 175);
     }
     100% {
@@ -202,3 +174,23 @@
     }
   }
 </style>
+
+<div>
+  <div class="board">
+    {#each [...Array(3).keys()] as i}
+      {#each [...Array(3).keys()] as j}
+        <div
+          class="square"
+          class:played={state[i][j] !== ttt.EMPTY}
+          class:highlight-winning-line={finalState[i][j] === 1}
+          on:click={() => move(i, j)}>
+          <div class="tag">
+            {@html state[i][j] === ttt.PLAYER ? '&#x0fbe;' : ''}
+            {@html state[i][j] === ttt.COMPUTER ? '&#x262f;' : ''}
+          </div>
+        </div>
+      {/each}
+    {/each}
+  </div>
+  <Scoreboard {stats} />
+</div>
