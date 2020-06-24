@@ -9,8 +9,8 @@
   export let edit = false;
   let disabled = !edit;
 
-  function highlight(node, { duration = 400 }) {
-    const MAXSCALE = 1.6;
+  function highlight(node, { duration = 500 }) {
+    const MAXSCALE = 1.8;
 
     return {
       duration,
