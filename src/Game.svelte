@@ -1,6 +1,7 @@
 <script>
   import * as ttt from "./tictactoe.js";
 
+  import InputRadio from "./InputRadio.svelte";
   import Scoreboard from "./Scoreboard.svelte";
 
   export let handicap = 80;
@@ -33,10 +34,14 @@
     locked = false;
   }
 
-  let stats = {
-    computer: 0,
-    draw: 0,
-    player: 0
+  let stats;
+
+  const resetStats = () => {
+    stats = {
+      computer: 0,
+      draw: 0,
+      player: 0
+    };
   };
 
   async function processResults() {
@@ -53,10 +58,10 @@
     }
 
     finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-    
+
     if (game.winner !== ttt.EMPTY) {
       let line = game._winningLine;
-  
+
       line.forEach(e => {
         finalState[Math.floor(e / 3)][e % 3] = 1;
       });
@@ -93,7 +98,22 @@
     }
   }
 
-  newGame(playerBegins);
+  let levels = [
+    { label: "trivial", handicap: 90 },
+    { label: "easy", handicap: 65 },
+    { label: "medium", handicap: 48 },
+    { label: "hard", handicap: 24 },
+    { label: "impossible", handicap: 5 }
+  ];
+
+  let currentLevel = 0;
+
+  $: {
+    console.log(`level selected ${currentLevel}`);
+    handicap = levels[currentLevel].handicap;
+    resetStats();
+    newGame(playerBegins);
+  }
 </script>
 
 <style>
@@ -204,4 +224,5 @@
     {/each}
   </div>
   <Scoreboard {stats} />
+  <InputRadio bind:id={currentLevel} label={levels.map(v => v.label)} />
 </div>
