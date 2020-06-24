@@ -44,7 +44,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    padding-left: 0.7em;
+    padding-left: 0.4em;
   }
 
   .hidden {
