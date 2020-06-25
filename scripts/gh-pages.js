@@ -3,6 +3,9 @@ let ghpages = require('gh-pages');
 ghpages.publish(
     'public',
     {
+        add: true,
+        history: false,
+        src: 'build/*',
         branch: 'gh-pages',
         repo: 'git@github.com:aioooi/tictactoe_svelte.git',
         user: {
