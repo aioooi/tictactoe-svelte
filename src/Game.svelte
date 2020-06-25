@@ -1,5 +1,5 @@
 <script>
-  import * as ttt from "./tictactoe.js";
+  import * as ttt from "../lib/tictactoe/tictactoe.js";
 
   import InputRadio from "./InputRadio.svelte";
   import Scoreboard from "./Scoreboard.svelte";
