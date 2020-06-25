@@ -37,6 +37,7 @@
     border-radius: 25%;
     width: 14px;
     height: 14px;
+    cursor: pointer;
   }
 
   input[type="radio"]:checked {
