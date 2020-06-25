@@ -16,7 +16,7 @@ cd tictactoe_svelte
 npm install
 ```
 
-Clone the Tic Tac Toe engine from <https://github.com/aioooi/tictactoe_js> using  
+Clone the Tic Tac Toe engine from <https://github.com/aioooi/tictactoe_js> using 
 [degit](https://github.com/Rich-Harris/degit):
 
 
