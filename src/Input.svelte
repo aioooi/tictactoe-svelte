@@ -28,6 +28,7 @@
     box-sizing: border-box;
     border-bottom: 2px solid transparent;
     margin-bottom: -2px;
+    font-weight: inherit;
   }
 
   input[type="text"]:focus {

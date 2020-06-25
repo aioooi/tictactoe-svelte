@@ -15,13 +15,15 @@
 
 <style>
   .grid {
-    width: 50vw;
-    max-width: 50vh;
+    width: 40vw;
+    min-width: 360px;
+    max-width: 40vh;
+    margin: 4vh auto 2vh;
     display: grid;
-    text-align: center;
     grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
     text-transform: uppercase;
-    margin: 3em 0;
+    font-weight: 300;
     grid-gap: 3px;
   }
 </style>

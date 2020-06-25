@@ -7,16 +7,18 @@
 
 <style>
   .grid {
-    width: 50vw;
-    max-width: 50vh;
+    width: 38vw;
+    min-width: 338px;
+    max-width: 38vh;
+    margin: 2vh auto;
     display: grid;
     text-align: center;
     /* set dynamically in html below: */
     /* grid-template-columns: 1fr 1fr 1fr; */
     text-transform: uppercase;
-    margin: 3em 0;
     grid-gap: 3px;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 300;
   }
 
   .radioBtn {

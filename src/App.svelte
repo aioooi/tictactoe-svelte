@@ -3,11 +3,16 @@
 </script>
 
 <style>
+  h1 {
+    margin: 2vh auto 1vh;
+  }
+
+  h2 {
+    margin: 1vh auto 1vh;
+  }
+
   main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 4vh auto 1vh;
   }
 </style>
 

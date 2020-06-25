@@ -125,12 +125,14 @@
   }
 
   .board {
-    margin: auto;
+    margin: 0 auto;
     padding: 0;
-    width: 50vw;
-    height: 50vw;
-    max-width: 50vh;
-    max-height: 50vh;
+    width: 40vw;
+    height: 40vw;
+    max-width: 40vh;
+    max-height: 40vh; 
+    min-width: 308px;
+    min-height: 308px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 4px;
