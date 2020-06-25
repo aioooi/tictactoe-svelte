@@ -12,7 +12,7 @@
 </style>
 
 <h1>Let's Play: Tic Tac Toe</h1>
-<h2>(implemented in Svelte)</h2>
+<h2>(implemented using Svelte)</h2>
 <main>
   <Game />
 </main>
