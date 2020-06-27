@@ -15,9 +15,9 @@
 
 <style>
   .grid {
-    width: 40vw;
-    min-width: 360px;
-    max-width: 40vh;
+    width: 38vw;
+    min-width: 338px;
+    max-width: 38vh;
     margin: 4vh auto 2vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
