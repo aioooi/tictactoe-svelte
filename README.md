@@ -3,7 +3,7 @@
 This is a simple Tic Tac Toe SPA implemented using [Svelte](https://svelte.dev), based on the 
 project template found at <https://github.com/sveltejs/template>.
 
-Play at <https://aioooi.github.io/tictactoe_svelte/> :blush:
+Play at <https://aioooi.github.io/tictactoe-svelte/> :blush:
 
 
 ## Requirements and Installation
@@ -11,12 +11,12 @@ Play at <https://aioooi.github.io/tictactoe_svelte/> :blush:
 Assuming a rather recent version of [Node.js](https://nodejs.org), npm and the likes is installed:
 
 ```bash
-git clone https://github.com/aioooi/tictactoe_svelte
-cd tictactoe_svelte
+git clone https://github.com/aioooi/tictactoe-svelte
+cd tictactoe-svelte
 npm install
 ```
 
-Clone the Tic Tac Toe engine from <https://github.com/aioooi/tictactoe_js> using 
+Clone the Tic Tac Toe engine from <https://github.com/aioooi/tictactoe-js> using 
 [degit](https://github.com/Rich-Harris/degit):
 
 

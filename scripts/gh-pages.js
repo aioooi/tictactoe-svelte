@@ -7,7 +7,7 @@ ghpages.publish(
         history: false,
         src: 'build/*',
         branch: 'gh-pages',
-        repo: 'git@github.com:aioooi/tictactoe_svelte.git',
+        repo: 'git@github.com:aioooi/tictactoe-svelte.git',
         user: {
             name: 'Chris',
             email: '66511731+aioooi@users.noreply.github.com'
