@@ -22,7 +22,7 @@ Clone the Tic Tac Toe engine from <https://github.com/aioooi/tictactoe-js> using
 
 ```bash
 mkdir lib
-npx degit aioooi/tictactoe_js lib/tictactoe
+npx degit aioooi/tictactoe-js lib/tictactoe
 ```
 
 
