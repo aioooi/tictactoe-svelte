@@ -17,7 +17,7 @@
   let finalState;
   let locked;
 
-  let afterDrawPlayerBegins = true;
+  let playerBeginsAfterDraw = true;
 
   async function newGame(playerBegins = true) {
     game = new ttt.Game(handicap, playerBegins);
@@ -53,8 +53,8 @@
       playerBegins = false;
     } else {
       stats.draw += 1;
-      playerBegins = afterDrawPlayerBegins;
-      afterDrawPlayerBegins = !afterDrawPlayerBegins;
+      playerBegins = playerBeginsAfterDraw;
+      playerBeginsAfterDraw = !playerBeginsAfterDraw;
     }
 
     finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
