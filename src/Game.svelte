@@ -17,7 +17,7 @@
   let finalState;
   let locked;
 
-  let afterDrawPlayer = true;
+  let afterDrawPlayerBegins = true;
 
   async function newGame(playerBegins = true) {
     game = new ttt.Game(handicap, playerBegins);
@@ -53,8 +53,8 @@
       playerBegins = false;
     } else {
       stats.draw += 1;
-      playerBegins = afterDrawPlayer;
-      afterDrawPlayer = !afterDrawPlayer;
+      playerBegins = afterDrawPlayerBegins;
+      afterDrawPlayerBegins = !afterDrawPlayerBegins;
     }
 
     finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
@@ -98,7 +98,7 @@
     }
   }
 
-  let levels = [
+  const levels = [
     { label: "trivial", handicap: 90 },
     { label: "easy", handicap: 65 },
     { label: "medium", handicap: 48 },
