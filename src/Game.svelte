@@ -4,7 +4,6 @@
   import InputRadio from "./InputRadio.svelte";
   import Scoreboard from "./Scoreboard.svelte";
 
-  export let handicap = 80;
   export let playerBegins = true;
   export let delay = 300;
 
@@ -20,7 +19,7 @@
   let playerBeginsAfterDraw = true;
 
   async function newGame(playerBegins = true) {
-    game = new ttt.Game(handicap, playerBegins);
+    game = new ttt.Game(levels[currentLevel].handicap, playerBegins);
     state = game.state;
     finalState = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
@@ -106,11 +105,10 @@
     { label: "impossible", handicap: 5 }
   ];
 
-  let currentLevel = 0;
+  let currentLevel = 2;
 
   $: {
     console.log(`level selected ${currentLevel}`);
-    handicap = levels[currentLevel].handicap;
     resetStats();
     newGame(playerBegins);
   }
