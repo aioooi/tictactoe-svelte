@@ -8,7 +8,7 @@ Play at <https://aioooi.github.io/tictactoe-svelte/> :blush:
 
 ## Requirements and Installation
 
-Assuming a rather recent version of [Node.js](https://nodejs.org), npm and the likes is installed:
+Assuming rather recent versions [Node.js](https://nodejs.org), npm and the likes are installed:
 
 ```bash
 git clone https://github.com/aioooi/tictactoe-svelte
