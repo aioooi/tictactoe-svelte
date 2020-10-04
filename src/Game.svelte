@@ -161,6 +161,7 @@
     transform: translate(-50%, -50%);
     font-size: 5vw;
     line-height: 5vw;
+    cursor: default;
   }
 
   .played {
